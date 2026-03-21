@@ -1,0 +1,195 @@
+/* ── PAGE ────────────────────────────────────────────────────── */
+.s3-page {
+  min-height: 100vh;
+  padding: 40px 60px 60px;
+  background: #050505;
+  color: #fff;
+  font-family: "Orbitron", sans-serif;
+  box-sizing: border-box;
+}
+
+/* ── TWO-COLUMN LAYOUT ───────────────────────────────────────── */
+.s3-layout {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 48px;
+  align-items: start;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* ── PREVIEW BOX ─────────────────────────────────────────────── */
+.preview-box {
+  position: relative;
+  width: 100%;
+  height: 490px;          /* explicit px — REQUIRED for Three.js canvas */
+  border: 1px solid #1e1e1e;
+  border-radius: 12px;
+  background: #060606;
+  overflow: hidden;
+}
+
+/* Three.js appends a <canvas> directly — make it fill the box */
+.preview-box canvas {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Corner bracket decorations */
+.corner {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border-color: #444;
+  border-style: solid;
+  z-index: 10;
+  pointer-events: none;
+}
+.corner.tl { top: 12px;    left: 12px;    border-width: 2px 0 0 2px; }
+.corner.tr { top: 12px;    right: 12px;   border-width: 2px 2px 0 0; }
+.corner.bl { bottom: 12px; left: 12px;    border-width: 0 0 2px 2px; }
+.corner.br { bottom: 12px; right: 12px;   border-width: 0 2px 2px 0; }
+
+/* ── RIGHT PANEL ─────────────────────────────────────────────── */
+.s3-right {
+  padding-top: 8px;
+}
+
+.s3-heading {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.s3-sub {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 20px;
+  font-family: sans-serif;
+}
+
+/* ── MATERIAL GRID ───────────────────────────────────────────── */
+.s3-mat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.s3-mat-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border: 1px solid #1e1e1e;
+  border-radius: 10px;
+  background: #0b0b0b;
+  cursor: pointer;
+  transition: border-color 0.25s, box-shadow 0.25s;
+  box-sizing: border-box;
+}
+
+.s3-mat-card:hover  { border-color: #555; }
+.s3-mat-card.active {
+  border-color: #c87b1a;
+  box-shadow: 0 0 18px rgba(200, 123, 26, 0.25);
+}
+
+.s3-card-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.s3-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.s3-mat-name {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  line-height: 1.3;
+}
+
+.s3-mat-tier {
+  font-size: 10px;
+  color: #666;
+  margin-top: 2px;
+  font-family: sans-serif;
+}
+
+.s3-pip {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #c87b1a;
+  flex-shrink: 0;
+}
+
+/* ── SPEC BOX ────────────────────────────────────────────────── */
+.s3-spec-box {
+  border: 1px solid #1a5f5f;
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+.s3-spec-title {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: #c87b1a;
+  margin-bottom: 14px;
+}
+
+.s3-spec-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-bottom: 9px;
+  font-family: sans-serif;
+}
+.s3-spec-row span:first-child { color: #888; }
+.s3-spec-row span:last-child {
+  color: #ddd;
+  font-weight: 700;
+  font-family: "Orbitron", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+
+/* ── CTA BUTTON ──────────────────────────────────────────────── */
+.s3-cta {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(90deg, #3d1c06 0%, #7a3d0e 50%, #3d1c06 100%);
+  border: 1px solid #7a3d0e;
+  border-radius: 8px;
+  color: #e8c07a;
+  font-family: "Orbitron", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: box-shadow 0.3s, background 0.3s;
+  box-sizing: border-box;
+}
+
+.s3-cta:hover {
+  box-shadow: 0 0 24px rgba(200,120,26,0.45);
+  background: linear-gradient(90deg, #4a2208 0%, #9a4e10 50%, #4a2208 100%);
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .s3-layout { grid-template-columns: 1fr; }
+  .preview-box { height: 360px; }
+  .s3-page { padding: 24px 20px 40px; }
+}

@@ -1,0 +1,351 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  --papaya: #FF8000;
+  --white: #ffffff;
+  --muted: rgba(255, 255, 255, 0.5);
+  --black: #0a0a0a;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--black);
+  font-family: 'Space Mono', monospace;
+  cursor: none;
+}
+
+/* ── NAV ── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 48px;
+  background: linear-gradient(to bottom, rgba(10,10,10,0.95) 0%, transparent 100%);
+}
+
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  color: var(--white);
+  letter-spacing: 2px;
+}
+
+.nav-logo span {
+  color: var(--papaya);
+}
+
+.nav-label {
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 0 8vw;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(255,128,0,0.06) 0%, transparent 60%),
+    var(--black);
+}
+
+/* scanline texture */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.04) 2px,
+    rgba(0,0,0,0.04) 4px
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── LEFT COPY ── */
+.hero-copy {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-kicker {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: var(--papaya);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  animation: fadeUp 0.6s ease both;
+}
+
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(64px, 9vw, 130px);
+  line-height: 0.9;
+  color: var(--white);
+  letter-spacing: 2px;
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+
+.hero-title span {
+  color: var(--papaya);
+}
+
+.hero-sub {
+  max-width: 400px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--muted);
+  margin: 28px 0 48px;
+  animation: fadeUp 0.6s 0.2s ease both;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--papaya);
+  color: #000;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 18px 40px;
+  border: none;
+  cursor: none;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  transition: background 0.2s, transform 0.2s;
+  animation: fadeUp 0.6s 0.3s ease both;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
+  transform: translateX(-100%);
+  transition: transform 0.4s ease;
+}
+
+.cta-btn:hover::after {
+  transform: translateX(100%);
+}
+
+.cta-btn:hover {
+  background: #fff;
+  transform: translateY(-2px);
+}
+
+.cta-btn svg {
+  transition: transform 0.2s;
+}
+
+.cta-btn:hover svg {
+  transform: translateX(4px);
+}
+
+/* ── RIGHT: CAR STAGE ── */
+.hero-stage {
+  position: relative;
+  z-index: 2;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.car-wrap {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  cursor: none;
+  display: flex;
+  align-items: center;
+}
+
+/* ── CAR IMAGE: mix-blend-mode removes white bg ── */
+.car-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 20px 60px rgba(255, 60, 0, 0.4)) brightness(1.05) contrast(1.05);
+  animation: carEntry 1.4s 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  position: relative;
+  z-index: 1;
+}
+
+.car-wrap.is-hovering .car-img {
+  filter: drop-shadow(0 30px 90px rgba(255, 100, 0, 0.75)) brightness(1.12) contrast(1.1) saturate(1.2);
+  transition: filter 0.35s ease;
+}
+
+/* ── VEIL: dark overlay — JS injects radial hole at cursor on hover ── */
+.veil {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: rgba(10,10,10,0.96);
+  pointer-events: none;
+  transition: background 0.4s ease;
+}
+
+/* When hovering, JS takes over and sets background inline — no transition to keep it snappy */
+.car-wrap.is-hovering .veil {
+  transition: none;
+}
+
+/* ── REVEAL LINES ── */
+.reveal-line {
+  position: absolute;
+  background: var(--papaya);
+  opacity: 0;
+  z-index: 3;
+  transition: opacity 0.3s, width 0.5s ease, height 0.5s ease;
+}
+
+.reveal-line.h { height: 1px; width: 0; }
+.reveal-line.v { width: 1px; height: 0; }
+
+.car-wrap.is-hovering .reveal-line         { opacity: 0.6; }
+.car-wrap.is-hovering .rl-top             { width: 65%; }
+.car-wrap.is-hovering .rl-bottom          { width: 65%; }
+.car-wrap.is-hovering .rl-left            { height: 55%; }
+.car-wrap.is-hovering .rl-right           { height: 55%; }
+
+.rl-top    { top: -10px;    left: 17%; }
+.rl-bottom { bottom: -10px; left: 17%; }
+.rl-left   { left: -10px;   top: 22%; }
+.rl-right  { right: -10px;  top: 22%; }
+
+/* ── CORNER DOTS ── */
+.corner-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--papaya);
+  opacity: 0;
+  z-index: 3;
+  transform: scale(0);
+  transition: opacity 0.25s 0.25s, transform 0.25s 0.25s;
+}
+
+.car-wrap.is-hovering .corner-dot {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.cd-tl { top: -12px;    left: 15%; }
+.cd-tr { top: -12px;    right: 15%; }
+.cd-bl { bottom: -12px; left: 15%; }
+.cd-br { bottom: -12px; right: 15%; }
+
+/* ── SPEC TAGS ── */
+.spec-tag {
+  display: none;
+}
+
+.model-badge {
+  display: none;
+}
+
+/* ── GROUND ── */
+.ground-line {
+  position: absolute;
+  bottom: 12%;
+  left: 5%;
+  right: 5%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,128,0,0.3), transparent);
+  z-index: 0;
+}
+
+.ground-glow {
+  position: absolute;
+  bottom: 8%;
+  left: 10%;
+  right: 10%;
+  height: 50px;
+  background: radial-gradient(ellipse, rgba(255,100,0,0.18) 0%, transparent 70%);
+  filter: blur(10px);
+  z-index: 0;
+}
+
+/* ── CUSTOM CURSOR ── */
+.cursor {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid var(--papaya);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background 0.2s, border-color 0.2s;
+}
+
+.cursor.hovering {
+  width: 56px;
+  height: 56px;
+  background: rgba(255,128,0,0.1);
+  border-color: rgba(255,128,0,0.8);
+}
+
+.cursor-dot {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  background: var(--papaya);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+
+/* ── KEYFRAMES ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes carEntry {
+  from { opacity: 0; transform: translateX(60px) scale(0.88); }
+  to   { opacity: 1; transform: translateX(0)    scale(1); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 100px 6vw 48px;
+    gap: 48px;
+  }
+  .hero-stage { height: 50vh; }
+  .nav { padding: 18px 24px; }
+}

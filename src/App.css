@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  --bg: #080808;
+  --surface: #111111;
+  --surface2: #1a1a1a;
+  --border: #242424;
+  --papaya: #FF8000;
+  --papaya-dim: #cc6600;
+  --papaya-glow: rgba(255, 128, 0, 0.15);
+  --white: #f0ede8;
+  --muted: #666;
+  --text: #c8c4bc;
+  --radius: 4px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Noise overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes lineIn {
+  from {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ── SHARED BUTTON STYLES ── */
+.btn-next {
+  background: var(--papaya);
+  border: none;
+  color: #000;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 14px 36px;
+  cursor: pointer;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-next:hover {
+  background: var(--white);
+  transform: translateX(3px);
+}
+
+.btn-next:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-back {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-back:hover {
+  border-color: var(--text);
+  color: var(--text);
+}
+
+/* ── SHARED SECTION STYLES ── */
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 56px;
+  color: var(--white);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.section-title span {
+  color: var(--papaya);
+}
+
+.section-sub {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 48px;
+  letter-spacing: 0.5px;
+}
+
+/* ── NAV BUTTONS (bottom of each section) ── */
+.nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+
+/* ── FORM SHARED STYLES ── */
+.form-input,
+.form-select {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--white);
+  padding: 14px 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+  appearance: none;
+  border-radius: 0;
+}
+
+.form-input:focus,
+.form-select:focus {
+  border-color: var(--papaya);
+}
+
+.form-input::placeholder {
+  color: var(--muted);
+}
+
+.form-select option {
+  background: var(--surface);
+}
+
+.form-label {
+  display: block;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 40px;
+  }
+}
