@@ -10,7 +10,7 @@ const STEPS = [
 
 export default function ProgressBar({ currentStep, onStepClick }) {
   return (
-    <div className="progress-container">
+    <div className="progress-container glass-panel-nav">
       <div className="progress-steps">
         {STEPS.map((step, index) => {
           const isDone = step.num < currentStep;
@@ -22,7 +22,15 @@ export default function ProgressBar({ currentStep, onStepClick }) {
                 className={`step ${isActive ? 'active' : ''} ${isDone ? 'done' : ''}`}
                 onClick={() => isDone && onStepClick(step.num)}
               >
-                <div className="step-num">{step.num}</div>
+                <div className="step-num">
+                   {isDone ? (
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 13L9 17L19 7" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                   ) : (
+                     step.num
+                   )}
+                </div>
                 <div className="step-label">{step.label}</div>
               </div>
               {index < STEPS.length - 1 && (

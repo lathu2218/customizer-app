@@ -10,12 +10,15 @@ import Step3Customize from './components/Step3Customize';
 import Step4Booking from './components/Step4Booking';
 import Step5Confirm from './components/Step5Confirm';
 import PaymentModal from './components/PaymentModal';
+import LoadingScreen from './components/LoadingScreen';
+import CustomCursor from './components/CustomCursor';
 
 import { BASE_PRICE } from './data';
 
 const INITIAL_BOOKING = { name: '', phone: '', email: '', date: '', time: '', notes: '' };
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const [showHero, setShowHero] = useState(true);
   const [currentStep, setCurrentStep] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -80,9 +83,20 @@ export default function App() {
 
   return (
     <>
-      <Navbar />
-
-      {showHero && <Hero onStart={startApp} />}
+      <CustomCursor />
+      {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
+      
+      <div className="global-bg" style={{ opacity: isLoading ? 0 : 1, transition: 'opacity 1s ease' }}>
+        <div className="bg-blob blob-1"></div>
+        <div className="bg-blob blob-2"></div>
+        <div className="bg-blob blob-3"></div>
+        <div className="particles"></div>
+      </div>
+      
+      {!isLoading && (
+        <>
+          <Navbar />
+          {showHero && <Hero onStart={startApp} />}
 
       {!showHero && (
         <>
@@ -162,6 +176,8 @@ export default function App() {
             material={material}
           />
         </>
+      )}
+      </>
       )}
     </>
   );

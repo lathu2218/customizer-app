@@ -29,18 +29,18 @@ function SeatPreview({ selectedMaterial }) {
     camera.lookAt(0, 0.8, 0);
 
     // Lighting — dramatic and moody
-    scene.add(new THREE.AmbientLight(0xffffff, 0.4));
+    scene.add(new THREE.AmbientLight(0xffffff, 0.5));
 
-    const key = new THREE.DirectionalLight(0xfff5e0, 2.2);
+    const key = new THREE.DirectionalLight(0xffffff, 2.0);
     key.position.set(5, 9, 6);
     key.castShadow = true;
     scene.add(key);
 
-    const fill = new THREE.DirectionalLight(0xff8000, 0.4);
+    const fill = new THREE.DirectionalLight(0x45a29e, 0.6);
     fill.position.set(-4, 2, -3);
     scene.add(fill);
 
-    const rim = new THREE.DirectionalLight(0xff6000, 0.6);
+    const rim = new THREE.DirectionalLight(0x66fcf1, 0.8);
     rim.position.set(0, -2, -6);
     scene.add(rim);
 
@@ -48,8 +48,8 @@ function SeatPreview({ selectedMaterial }) {
     const groundGeo = new THREE.PlaneGeometry(10, 10);
     const groundMat = new THREE.MeshStandardMaterial({
       color: 0x111111,
-      roughness: 0.9,
-      metalness: 0.1,
+      roughness: 0.8,
+      metalness: 0.2,
     });
     const ground = new THREE.Mesh(groundGeo, groundMat);
     ground.rotation.x = -Math.PI / 2;
@@ -58,9 +58,9 @@ function SeatPreview({ selectedMaterial }) {
     scene.add(ground);
 
     const mat = new THREE.MeshStandardMaterial({
-      color: new THREE.Color(selectedMaterial?.color || "#8a4b08"),
-      roughness: 0.6,
-      metalness: 0.08,
+      color: new THREE.Color(selectedMaterial?.color || "#111111"),
+      roughness: 0.4,
+      metalness: 0.15,
     });
     stateRef.current.mat = mat;
 
@@ -92,9 +92,9 @@ function SeatPreview({ selectedMaterial }) {
     // Glow plane behind seat
     const glowGeo = new THREE.PlaneGeometry(4, 5);
     const glowMat = new THREE.MeshBasicMaterial({
-      color: 0xff8000,
+      color: 0x66fcf1,
       transparent: true,
-      opacity: 0.03,
+      opacity: 0.04,
     });
     const glow = new THREE.Mesh(glowGeo, glowMat);
     glow.position.set(0, 1.5, -1.5);
@@ -104,11 +104,11 @@ function SeatPreview({ selectedMaterial }) {
     let angle = 0;
     const animate = () => {
       frameId = requestAnimationFrame(animate);
-      angle += 0.004;
-      camera.position.x = Math.sin(angle) * 3.2;
-      camera.position.z = Math.cos(angle) * 3.2 + 5.8;
-      camera.position.y = 1.4;
-      camera.lookAt(0, 0.8, 0);
+      angle += 0.003;
+      camera.position.x = Math.sin(angle) * 3.5;
+      camera.position.z = Math.cos(angle) * 3.5 + 5.5;
+      camera.position.y = 1.6;
+      camera.lookAt(0, 1.0, 0);
       renderer.render(scene, camera);
     };
     animate();
@@ -135,18 +135,18 @@ function SeatPreview({ selectedMaterial }) {
 
   useEffect(() => {
     if (stateRef.current.mat) {
-      stateRef.current.mat.color.set(selectedMaterial?.color || "#8a4b08");
+      stateRef.current.mat.color.set(selectedMaterial?.color || "#111111");
     }
   }, [selectedMaterial]);
 
   return (
-    <div className="preview-wrap" ref={mountRef}>
+    <div className="preview-wrap fade-in-up" ref={mountRef}>
       <span className="corner tl" />
       <span className="corner tr" />
       <span className="corner bl" />
       <span className="corner br" />
       <div className="preview-label">
-        <span className="preview-label-dot" style={{ background: selectedMaterial?.color }} />
+        <span className="preview-label-dot" style={{ background: selectedMaterial?.color || "var(--accent)" }} />
         {selectedMaterial?.name || "Select a material"}
       </div>
       <div className="preview-scan" />
@@ -165,7 +165,7 @@ const SPECS = [
 /* ── MAIN COMPONENT ── */
 export default function Step3Customize({ selectedMaterial, onSelectMaterial, onNext, onBack }) {
   return (
-    <div className="s3-page">
+    <div className="s3-page section-content">
 
       {/* ── TOP BAR ── */}
       <div className="s3-topbar">
@@ -223,7 +223,11 @@ export default function Step3Customize({ selectedMaterial, onSelectMaterial, onN
                   </div>
                   <div className="s3-mat-check">
                     {selectedMaterial?.id === m.id
-                      ? <span className="s3-check-active">✓</span>
+                      ? <span className="s3-check-active">
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 13L9 17L19 7" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </span>
                       : <span className="s3-check-empty" />
                     }
                   </div>
@@ -250,16 +254,16 @@ export default function Step3Customize({ selectedMaterial, onSelectMaterial, onN
 
           {/* Nav */}
           <div className="s3-nav">
-            <button className="s3-back" onClick={onBack}>
+            <button className="btn-back" onClick={onBack}>
               <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                 <path d="M13 8H3M7 12l-4-4 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
               Back
             </button>
-            <button className="s3-cta" onClick={onNext} disabled={!selectedMaterial}>
+            <button className="btn-next" onClick={onNext} disabled={!selectedMaterial}>
               Book Appointment
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </button>
           </div>

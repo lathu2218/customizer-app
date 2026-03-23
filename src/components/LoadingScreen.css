@@ -1,0 +1,96 @@
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  background: #e6e6e6; /* Off-white matching a light clean aesthetic */
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s ease;
+  overflow: hidden;
+}
+
+.speedometer-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.speedometer-gauge {
+  position: relative;
+  width: 400px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.speedometer-svg {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.speedometer-fill {
+  transition: stroke-dashoffset 0.1s linear;
+}
+
+.speedometer-text {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: -15px; /* Pull text up near the baseline */
+}
+
+.speed-number {
+  font-family: 'Outfit', sans-serif;
+  font-size: 80px;
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -2px;
+  color: #000;
+}
+
+.speed-unit {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 4px;
+}
+
+.loading-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #777;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  animation: pulseOpacity 1.5s infinite;
+  margin-top: 20px;
+}
+
+@keyframes pulseOpacity {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@media (max-width: 600px) {
+  .speedometer-gauge {
+    width: 250px;
+    height: 125px;
+  }
+  .speed-number {
+    font-size: 60px;
+  }
+}

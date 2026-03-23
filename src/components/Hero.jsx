@@ -1,91 +1,45 @@
-import { useState, useRef, useEffect } from 'react';
+import { useEffect } from 'react';
 import './Hero.css';
 
-import carImage from '../assets/car.png';
-
-const CAR_SRC = carImage;
-
 export default function Hero({ onStart }) {
-  const carWrapRef = useRef(null);
-  const veilRef    = useRef(null);
-  const cursorRef  = useRef(null);
-  const dotRef     = useRef(null);
-  const [hovering, setHovering] = useState(false);
-  const [revealed, setRevealed] = useState(false);
 
+  // Load model-viewer web component via CDN
   useEffect(() => {
-    const move = (e) => {
-      if (cursorRef.current) {
-        cursorRef.current.style.left = e.clientX + 'px';
-        cursorRef.current.style.top  = e.clientY + 'px';
-      }
-      if (dotRef.current) {
-        dotRef.current.style.left = e.clientX + 'px';
-        dotRef.current.style.top  = e.clientY + 'px';
-      }
-    };
-    window.addEventListener('mousemove', move);
-    return () => window.removeEventListener('mousemove', move);
+    if (!customElements.get('model-viewer')) {
+      const script = document.createElement('script');
+      script.type = 'module';
+      script.src = 'https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js';
+      document.head.appendChild(script);
+    }
   }, []);
-
-  const handleMouseMove = (e) => {
-    const rect = carWrapRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    const x    = e.clientX - rect.left;
-    const y    = e.clientY - rect.top;
-    const xPct = (x / rect.width)  * 100;
-    const yPct = (y / rect.height) * 100;
-    if (veilRef.current) {
-      // Directly set the radial gradient so the hole follows cursor precisely
-      veilRef.current.style.background = `radial-gradient(
-        circle 180px at ${xPct}% ${yPct}%,
-        transparent 0%,
-        rgba(10,10,10,0.25) 45%,
-        rgba(10,10,10,0.97) 85%
-      )`;
-    }
-  };
-
-  const handleMouseLeave = () => {
-    setHovering(false);
-    if (veilRef.current) {
-      veilRef.current.style.background = 'rgba(10,10,10,0.96)';
-    }
-  };
 
   return (
     <>
-      {/* Custom cursor */}
-      <div ref={cursorRef} className={`cursor ${hovering ? 'hovering' : ''}`} />
-      <div ref={dotRef} className="cursor-dot" />
-
-      {/* Nav — single instance */}
-      <nav className="nav">
-        <div className="nav-logo">AUTO<span>TRIMX</span></div>
-        <div className="nav-label">Automotive Interior Designer</div>
-      </nav>
-
-      {/* Hero */}
+      {/* Hero Section */}
       <section className="hero">
+
         {/* Left copy */}
         <div className="hero-copy">
-          <div className="hero-kicker">// Craft your drive</div>
+          <div className="hero-kicker">
+            <span className="pulse-dot"></span> Craft your drive
+          </div>
           <h1 className="hero-title">
             REDEFINE<br />
             <span>YOUR</span><br />
             INTERIOR
           </h1>
           <p className="hero-sub">
-            Custom car seat upholstery crafted for performance, comfort,
-            and style. Select your car, choose your materials, book your session.
+            Premium car seat upholstery crafted for performance, comfort,
+            and absolute style. Select your car, choose your materials,
+            and book your session in minutes.
           </p>
-          <button className="cta-btn" onClick={onStart}>
+          <button className="btn-next hero-cta" onClick={onStart}>
             Start Customizing
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
               <path
-                d="M3 8h10M9 4l4 4-4 4"
+                d="M5 12H19M19 12L12 5M19 12L12 19"
                 stroke="currentColor"
-                strokeWidth="1.5"
+                strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
@@ -93,43 +47,37 @@ export default function Hero({ onStart }) {
           </button>
         </div>
 
-        {/* Right: car reveal stage */}
+        {/* Right: 3D car stage */}
         <div className="hero-stage">
-          <div
-            className={`car-wrap ${hovering ? 'is-hovering' : ''}`}
-            ref={carWrapRef}
-            onMouseMove={handleMouseMove}
-            onMouseEnter={() => setHovering(true)}
-            onMouseLeave={handleMouseLeave}
-          >
-            {/* Full dark cover with radial hole at cursor */}
-            <div ref={veilRef} className="veil" />
+          <div className="car-wrap">
 
-            {/* Frame lines */}
-            <div className="reveal-line h rl-top" />
-            <div className="reveal-line h rl-bottom" />
-            <div className="reveal-line v rl-left" />
-            <div className="reveal-line v rl-right" />
-
-            {/* Corner dots */}
-            <div className="corner-dot cd-tl" />
-            <div className="corner-dot cd-tr" />
-            <div className="corner-dot cd-bl" />
-            <div className="corner-dot cd-br" />
-
-            {/* Ground glow */}
-            <div className="ground-line" />
-            <div className="ground-glow" />
-
-            {/* Car */}
-            <img
-              src={CAR_SRC}
-              alt="AutoTrimX Sport"
-              className="car-img"
-              draggable={false}
+            {/* 3D Porsche Model */}
+            <model-viewer
+              src="/porche_911.glb"
+              alt="Porsche 911 Carrera 4S"
+              auto-rotate
+              auto-rotate-delay="0"
+              rotation-per-second="30deg"
+              camera-controls
+              exposure="1"
+              environment-image="neutral"
+              camera-orbit="45deg 80deg 5m"
+              style={{
+                width: '100%',
+                height: '100vh',
+                minHeight: '500px',
+                background: 'transparent',
+                '--poster-color': 'transparent',
+                outline: 'none',
+                border: 'none',
+                position: 'relative',
+                zIndex: 1,
+              }}
             />
+
           </div>
         </div>
+
       </section>
     </>
   );
