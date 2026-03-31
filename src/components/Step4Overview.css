@@ -1,0 +1,227 @@
+.s4-overview-page {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ── TOP BAR ── */
+.s4-overview-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.s4-overview-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  animation: fadeLeft 0.5s ease both;
+}
+
+.s4-overview-title {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin: 0;
+  text-transform: uppercase;
+  animation: fadeLeft 0.5s ease both 0.1s;
+}
+
+.s4-overview-title span {
+  -webkit-text-stroke: 1px var(--text);
+  color: transparent;
+}
+
+.s4-overview-subtitle {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+  animation: fadeLeft 0.5s ease both 0.2s;
+}
+
+/* LIVE PREVIEW BADGE */
+.s4-overview-live-preview {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--surface-light);
+  padding: 0.75rem 1.25rem;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  animation: fadeRight 0.5s ease both 0.3s;
+}
+
+.s4-overview-live-swatch {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.s4-overview-live-name {
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.s4-overview-live-tier {
+  font-size: 0.75rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ── BODY ── */
+.s4-overview-body {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* ── 3D COL ── */
+.s4-overview-viewer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.overview-preview-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/10;
+  background: radial-gradient(circle at 50% 50%, rgba(30,30,30,0.8), #0a0a0a);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overview-preview-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.s4-overview-viewer-footer {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.s4-overview-rotate-hint {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ── CONTROLS COL ── */
+.s4-overview-controls-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  animation: fadeUp 0.5s ease both 0.4s;
+}
+
+.s4-overview-section {
+  background: var(--surface-dark);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.s4-overview-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.s4-overview-section-label {
+  font-weight: 600;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text);
+}
+
+.s4-overview-summary-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.summary-lbl {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.summary-val {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.summary-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+}
+
+.s4-overview-desc {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--border);
+}
+
+/* ── NAV ── */
+.s4-overview-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .s4-overview-body {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .s4-overview-title {
+    font-size: 2rem;
+  }
+  .s4-overview-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}

@@ -233,6 +233,7 @@ body::before {
   transition: all 0.3s;
   border-radius: 8px;
   -webkit-appearance: none;
+  appearance: none;
 }
 
 .form-input:focus,
@@ -284,4 +285,40 @@ body::before {
     width: 100%;
     justify-content: center;
   }
+}
+
+/* ── GLOBAL BACKGROUND IMAGE ── */
+.global-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: url('./assets/car.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.global-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* Very soft radial gradient */
+  background: radial-gradient(circle at center, rgba(11, 12, 16, 0.1) 0%, rgba(11, 12, 16, 0.7) 100%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.global-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* Light flat overlay */
+  background: rgba(11, 12, 16, 0.3);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.bg-blob, .particles {
+  position: relative;
+  z-index: 2;
 }

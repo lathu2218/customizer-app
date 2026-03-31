@@ -7,6 +7,8 @@ import kia from "../assets/kia.png";
 import mahindra from "../assets/mahindra.png";
 import bmw from "../assets/bmw.png";
 import mercedes from "../assets/mercedes.png";
+import volkswagen from "../assets/volkswagen.png";    
+
 export const BASE_PRICE = 3500;
 
 export const brands = [
@@ -19,6 +21,7 @@ export const brands = [
   { id: 'mahindra', name: 'Mahindra', icon: mahindra },
   { id: 'bmw', name: 'BMW', icon: bmw },
   { id: 'mercedes', name: 'Mercedes', icon: mercedes },
+  { id: 'volkswagen', name: 'Volkswagen', icon: volkswagen },
 ];
 
 export const models = {
@@ -70,7 +73,13 @@ export const models = {
     { id: 'eclass', name: 'E-Class', year: '2020–2024', seats: '5 Seats' },
     { id: 'gle', name: 'GLE', year: '2020–2024', seats: '5 Seats' },
   ],
+  volkswagen: [
+    { id: 'polo', name: 'Polo', year: '2020–2024', seats: '5 Seats' },
+    { id: 'virtus', name: 'Virtus', year: '2021–2024', seats: '5 Seats' },
+    { id: 'taigun', name: 'Taigun', year: '2021–2024', seats: '5 Seats' },
+  ],
 };
+
 
 export const colors = [
   { id: 'midnight', name: 'Midnight Black', hex: '#0a0a0a', price: 0 },

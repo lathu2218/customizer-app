@@ -8,10 +8,11 @@ import Step1Brand from './components/Step1Brand';
 import Step2Model from './components/Step2Model';
 import Step3Customize from './components/Step3Customize';
 import Step4Booking from './components/Step4Booking';
+import Step4Overview from './components/Step4Overview';
 import Step5Confirm from './components/Step5Confirm';
 import PaymentModal from './components/PaymentModal';
 import LoadingScreen from './components/LoadingScreen';
-import CustomCursor from './components/CustomCursor';
+
 
 import { BASE_PRICE } from './data';
 
@@ -68,7 +69,7 @@ export default function App() {
     setBookingRef(ref);
     setAdvanceAmount('₹' + advance.toLocaleString());
     closeModal();
-    goToStep(5);
+    goToStep(6);
   };
 
   // Navbar height (~80px) + ProgressBar height (~72px) + extra breathing room = 180px top
@@ -83,7 +84,7 @@ export default function App() {
 
   return (
     <>
-      <CustomCursor />
+
       {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
       
       <div className="global-bg" style={{ opacity: isLoading ? 0 : 1, transition: 'opacity 1s ease' }}>
@@ -143,6 +144,14 @@ export default function App() {
               )}
 
               {currentStep === 4 && (
+                <Step4Overview
+                  selectedMaterial={material}
+                  onNext={() => goToStep(5)}
+                  onBack={() => goToStep(3)}
+                />
+              )}
+
+              {currentStep === 5 && (
                 <Step4Booking
                   brand={brand}
                   model={model}
@@ -152,11 +161,11 @@ export default function App() {
                   booking={booking}
                   onBookingChange={setBooking}
                   onNext={openModal}
-                  onBack={() => goToStep(3)}
+                  onBack={() => goToStep(4)}
                 />
               )}
 
-              {currentStep === 5 && (
+              {currentStep === 6 && (
                 <Step5Confirm
                   bookingRef={bookingRef}
                   booking={booking}

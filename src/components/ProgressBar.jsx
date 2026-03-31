@@ -4,8 +4,9 @@ const STEPS = [
   { num: 1, label: 'Brand' },
   { num: 2, label: 'Model' },
   { num: 3, label: 'Customize' },
-  { num: 4, label: 'Book' },
-  { num: 5, label: 'Confirm' },
+  { num: 4, label: 'Overview' },
+  { num: 5, label: 'Book' },
+  { num: 6, label: 'Confirm' },
 ];
 
 export default function ProgressBar({ currentStep, onStepClick }) {
