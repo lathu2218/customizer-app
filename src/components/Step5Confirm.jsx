@@ -1,6 +1,6 @@
 import './Step5Confirm.css';
 
-export default function Step5Confirm({ bookingRef, booking, advanceAmount, onReset }) {
+export default function Step5Confirm({ bookingRef, booking, advanceAmount, bookingEmail, onReset }) {
   return (
     <div className="section-content fade-in-up">
       <div className="confirmation-center">
@@ -17,6 +17,16 @@ export default function Step5Confirm({ bookingRef, booking, advanceAmount, onRes
           within 24 hours to confirm the details and provide installation instructions.
         </p>
         <div className="confirm-ref">{bookingRef}</div>
+
+        {bookingEmail && (
+          <div className="email-sent-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M22 6L12 13L2 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            Confirmation sent to <strong>{bookingEmail}</strong>
+          </div>
+        )}
 
         <div className="confirm-details">
           <div className="summary-row">
@@ -49,3 +59,4 @@ export default function Step5Confirm({ bookingRef, booking, advanceAmount, onRes
     </div>
   );
 }
+

@@ -7,7 +7,7 @@ import kia from "../assets/kia.png";
 import mahindra from "../assets/mahindra.png";
 import bmw from "../assets/bmw.png";
 import mercedes from "../assets/mercedes.png";
-import volkswagen from "../assets/volkswagen.png";    
+import volkswagen from "../assets/volkswagen.png";
 
 export const BASE_PRICE = 3500;
 
@@ -94,22 +94,14 @@ export const colors = [
   { id: 'champagne', name: 'Champagne', hex: '#c8b87a', price: 1000 },
 ];
 
-export const patterns = [
-  { id: 'plain', name: 'Plain', icon: '▪️', price: 0 },
-  { id: 'diamond', name: 'Diamond', icon: '💎', price: 1200 },
-  { id: 'honeycomb', name: 'Honeycomb', icon: '🍯', price: 1500 },
-  { id: 'racing', name: 'Racing Stripe', icon: '⚡', price: 1000 },
-  { id: 'perforated', name: 'Perforated', icon: '🔵', price: 800 },
-  { id: 'custom', name: 'Custom Stitch', icon: '✦', price: 2000 },
-];
 
 export const materials = [
-  { id: 'italian', name: 'Italian Leather', color: '#c89b2c' },
-  { id: 'midnight', name: 'Midnight Alcantara', color: '#1e2a5a' },
-  { id: 'carbon', name: 'Carbon Sport', color: '#3a3a3a' },
-  { id: 'crimson', name: 'Royal Crimson', color: '#7a1a1a' },
-  { id: 'white', name: 'Arctic White', color: '#e8e4dc' },
-  { id: 'green', name: 'Emerald Racing', color: '#0f5132' },
+  { id: 'onyx', name: 'Midnight Onyx', color: '#111111' },
+  { id: 'ivory', name: 'Ivory Pearl', color: '#e6dec8' },
+  { id: 'cognac', name: 'Cognac Leather', color: '#8a4b26' },
+  { id: 'navy', name: 'Sapphire Navy', color: '#141e30' },
+  { id: 'bordeaux', name: 'Bordeaux Red', color: '#4a151b' },
+  { id: 'taupe', name: 'Warm Taupe', color: '#847970' },
 ];
 
 
